@@ -1,3 +1,9 @@
+const API_URL = 'http://localhost:3000';
+
 export const environment = {
-  production: true
+  production: true,
+  api: {
+    users: `${API_URL}/users`,
+    companies: `${API_URL}/companies`
+  }
 };
