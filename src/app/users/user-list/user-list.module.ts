@@ -1,3 +1,4 @@
+import { RippleModule } from 'primeng/ripple';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -16,7 +17,8 @@ import { UserListComponent } from './user-list.component';
     TableModule,
     CardModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    RippleModule,
   ],
 })
 export class UserListModule {}

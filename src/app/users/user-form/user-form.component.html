@@ -1,1 +1,116 @@
-<p>user-form works!</p>
+<h1>Usuários</h1>
+
+<p-card>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="needs-validation">
+    <div class="p-grid p-fluid">
+      <div class="p-col-12 p-md-4">
+        <div class="p-field">
+          <label for="name">Nome</label>
+          <input
+            id="name"
+            type="text"
+            pInputText
+            formControlName="name"
+            maxlength="100"
+            [ngClass]="{ 'ng-invalid ng-dirty': hasError('name') }"
+          />
+          <small *ngIf="hasError('name')" class="p-error"
+            >Campo obrigatório</small
+          >
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <div class="p-field">
+          <label for="username">Usuário</label>
+          <input
+            id="username"
+            type="text"
+            pInputText
+            formControlName="username"
+            maxlength="50"
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                hasError('username') || hasError('username', 'alreadyInUse')
+            }"
+          />
+          <small *ngIf="hasError('username')" class="p-error"
+            >Campo obrigatório</small
+          >
+          <small *ngIf="hasError('username', 'alreadyInUse')" class="p-error"
+            >Usuário já cadastrado</small
+          >
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <div class="p-field">
+          <label for="password">Senha</label>
+          <input
+            id="password"
+            type="password"
+            pInputText
+            formControlName="password"
+            maxlength="50"
+            [ngClass]="{ 'ng-invalid ng-dirty': hasError('password') }"
+          />
+          <small *ngIf="hasError('password')" class="p-error"
+            >Campo obrigatório</small
+          >
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <div class="p-field">
+          <label for="profile">Perfil</label>
+          <p-dropdown
+            inputId="profile"
+            [options]="[
+              { value: 'ADMIN', label: 'Admin' },
+              { value: 'OPERATOR', label: 'Operador' },
+              { value: 'VIEWER', label: 'Visualizador' }
+            ]"
+            formControlName="profile"
+            placeholder="Selecione um perfil"
+            optionLabel="label"
+            optionValue="value"
+            [ngClass]="{ 'ng-invalid ng-dirty': hasError('profile') }"
+          ></p-dropdown>
+          <small *ngIf="hasError('profile')" class="p-error"
+            >Campo obrigatório</small
+          >
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <div class="p-field">
+          <label for="company">Empresa</label>
+          <p-autoComplete
+            inputId="company"
+            formControlName="company"
+            [suggestions]="filteredCompanies"
+            (completeMethod)="filterCompanies($event)"
+            field="name"
+            [minLength]="1"
+            [dropdown]="true"
+            [forceSelection]="true"
+            [ngClass]="{ 'ng-invalid ng-dirty': hasError('company') }"
+          ></p-autoComplete>
+          <small *ngIf="hasError('company')" class="p-error"
+            >Campo obrigatório</small
+          >
+        </div>
+      </div>
+    </div>
+
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancelar"
+      [routerLink]="['..']"
+      class="p-button-secondary p-mr-3"
+    ></button>
+    <button pButton pRipple type="submit" label="Salvar"></button>
+  </form>
+</p-card>
